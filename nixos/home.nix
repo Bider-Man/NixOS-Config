@@ -187,6 +187,14 @@
     dunst.enable = true;
   };
   
+  home.pointerCursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Dark";
+    size = 24;
+    gtk.enable = true;
+    x11.enable = true;
+  };
+
   programs.zen-browser = {
     enable = true;
     policies = {

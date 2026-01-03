@@ -86,6 +86,7 @@
     wayland.enable = true;
   };
   services.displayManager.defaultSession = "hyprland";
+  services.udisks2.enable = true;
 
   # ==========================
   # USERS
@@ -124,6 +125,8 @@
     lazygit
     zathura
     zathuraPkgs.zathura_pdf_poppler
+    steam
+    kdePackages.dolphin
   ];
 
   # ==========================
