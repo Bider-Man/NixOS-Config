@@ -253,4 +253,9 @@
       fd       # For telescope
     ];
   };
+
+  # ===========================
+  # 10. Quickshell
+  # ===========================
+  programs.quickshell.enable = true;
 }

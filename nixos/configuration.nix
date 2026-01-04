@@ -130,6 +130,8 @@
     steam
     kdePackages.dolphin
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    protonvpn-gui
+    protonmail-desktop
   ];
 
   # ==========================
