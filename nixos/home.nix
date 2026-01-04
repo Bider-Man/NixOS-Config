@@ -5,11 +5,6 @@
 { config, lib, pkgs, inputs, ... }:
 
 {
-  # =========================
-  # 0. IMPORTS
-  # =========================
-  imports = [ inputs.zen-browser.homeModules.twilight ];
-
   # ==========================
   # 1. BASIC SETTINGS
   # ==========================
@@ -193,18 +188,6 @@
     size = 24;
     gtk.enable = true;
     x11.enable = true;
-  };
-
-  programs.zen-browser = {
-    enable = true;
-    policies = {
-      HardwareAcceleration = true;
-      EnableDRM = true;
-      "MediaFoundationVideoDecoding" = {
-        Enabled = true;
-      };
-      DisableAppUpdate = true;
-    };
   };
 
   # ==========================

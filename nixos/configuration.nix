@@ -2,7 +2,7 @@
 # FILE: configuration.nix (MINOR FIXES)
 # ================================================
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports = [
@@ -52,6 +52,8 @@
   # ==========================
   services.openssh.enable = true;
   hardware.bluetooth.enable = true;
+  services.upower.enable = true;
+  services.thermald.enable = true;
   
   services.pipewire = {
     enable = true;
@@ -127,6 +129,7 @@
     zathuraPkgs.zathura_pdf_poppler
     steam
     kdePackages.dolphin
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   # ==========================
