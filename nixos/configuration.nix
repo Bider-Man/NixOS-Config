@@ -127,11 +127,19 @@
     lazygit
     zathura
     zathuraPkgs.zathura_pdf_poppler
+    discord
     steam
+    protonup-qt
     kdePackages.dolphin
+    kdePackages.ark
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     protonvpn-gui
     protonmail-desktop
+    rofi
+    jq
+    papirus-icon-theme
+    hicolor-icon-theme
+    libreoffice-qt
   ];
 
   # ==========================
@@ -153,6 +161,8 @@
     fira-code
     fira-code-symbols
     font-awesome
+    jetbrains-mono
+    google-fonts
   ];
 
   # ==========================
