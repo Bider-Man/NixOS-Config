@@ -127,6 +127,8 @@
     eza
     fzf
     ripgrep
+    starship
+    papirus-icon-theme
     
     # Hyprland tools
     hyprpaper

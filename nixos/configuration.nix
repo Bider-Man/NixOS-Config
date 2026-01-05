@@ -113,7 +113,6 @@
     fish
     udiskie
     kitty
-    waybar
     wl-clipboard
     btop
     gnumake
@@ -135,10 +134,7 @@
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     protonvpn-gui
     protonmail-desktop
-    rofi
     jq
-    papirus-icon-theme
-    hicolor-icon-theme
     libreoffice-qt
   ];
 
@@ -154,16 +150,23 @@
   # ==========================
   # FONTS
   # ==========================
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-color-emoji
-    fira-code
-    fira-code-symbols
-    font-awesome
-    jetbrains-mono
-    google-fonts
-  ];
+  fonts = {
+    fontDir.enable = true;
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-color-emoji
+      liberation_ttf
+      fira-code
+      fira-code-symbols
+      nerd-fonts.symbols-only
+      google-fonts
+      material-design-icons
+    ] ++ (builtins.attrValues (
+      lib.filterAttrs (name: value: lib.isDerivation value) nerd-fonts
+    ));
+    fontconfig.enable = true;
+  };
 
   # ==========================
   # SECURITY
