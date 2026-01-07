@@ -126,7 +126,7 @@
     lazygit
     zathura
     zathuraPkgs.zathura_pdf_poppler
-    discord
+    vesktop
     steam
     protonup-qt
     kdePackages.dolphin

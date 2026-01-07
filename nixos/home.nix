@@ -22,7 +22,7 @@
   # BASH SHELL
   programs.bash = {
     enable = true;
-    
+  
     # Aliases for NixOS
     initExtra = ''
       # ===== NIXOS ALIASES =====
@@ -31,7 +31,7 @@
       alias nrb-boot='sudo nixos-rebuild boot --flake /etc/nixos#'
       alias nrc='sudo nix-collect-garbage --delete-old'
       alias ncu='cd /etc/nixos && sudo nix flake update'
-      
+    
       # ===== GIT ALIASES =====
       alias gs='git status'
       alias ga='git add'
@@ -42,20 +42,20 @@
       alias gco='git checkout'
       alias gb='git branch'
       alias gpl='git pull'
-      
+    
       # ===== HYPRLAND ALIASES =====
       alias hyprconf='nvim ~/.config/hypr/hyprland.conf'
       alias waybarconf='nvim ~/.config/waybar/config'
-      
+    
       # ===== SYSTEM MONITORING =====
       alias sysmon='btop'
       alias gpuwatch='watch -n 1 nvidia-smi'
       alias tempwatch='watch -n 1 sensors'
-      
+    
       # ===== NAVIGATION =====
       alias cdnix='cd /etc/nixos'
       alias cdconf='cd ~/.config'
-      
+    
       # ===== HELPER FUNCTIONS =====
       nix-help() {
         echo ""
@@ -65,7 +65,7 @@
         echo "ncu   - Update flake"
         echo ""
       }
-      
+    
       nix-update-all() {
         echo "Updating everything..."
         cd /etc/nixos
@@ -75,21 +75,63 @@
       }
     '';
   };
-  
+
   # FISH SHELL
   programs.fish = {
     enable = true;
+
+    # Aliases for Fish
     shellInit = ''
-      # Fish aliases
-      alias nrb 'sudo nixos-rebuild switch --flake /etc/nixos#'
-      alias nrc 'sudo nix-collect-garbage --delete-old'
-      alias ncu 'cd /etc/nixos && sudo nix flake update'
-      alias gs 'git status'
-      alias ga 'git add'
-      alias gc 'git commit'
-      alias gp 'git push'
+      # ===== NIXOS ALIASES =====
+      alias nrb='sudo nixos-rebuild switch --flake /etc/nixos#'
+      alias nrt='sudo nixos-rebuild test --flake /etc/nixos#'
+      alias nrb-boot='sudo nixos-rebuild boot --flake /etc/nixos#'
+      alias nrc='sudo nix-collect-garbage --delete-old'
+      alias ncu='cd /etc/nixos; and sudo nix flake update'
+    
+      # ===== GIT ALIASES =====
+      alias gs='git status'
+      alias ga='git add'
+      alias gc='git commit'
+      alias gp='git push'
+      alias gl='git log --oneline --graph'
+      alias gd='git diff'
+      alias gco='git checkout'
+      alias gb='git branch'
+      alias gpl='git pull'
+    
+      # ===== HYPRLAND ALIASES =====
+      alias hyprconf='nvim ~/.config/hypr/hyprland.conf'
+      alias waybarconf='nvim ~/.config/waybar/config'
+    
+      # ===== SYSTEM MONITORING =====
+      alias sysmon='btop'
+      alias gpuwatch='watch -n 1 nvidia-smi'
+      alias tempwatch='watch -n 1 sensors'
+    
+      # ===== NAVIGATION =====
+      alias cdnix='cd /etc/nixos'
+      alias cdconf='cd ~/.config'
+    
+      # ===== HELPER FUNCTIONS =====
+      function nix-help
+        echo ""
+        echo "NIXOS COMMANDS:"
+        echo "nrb   - Rebuild system"
+        echo "nrc   - Clean old generations"
+        echo "ncu   - Update flake"
+        echo ""
+      end
+    
+      function nix-update-all
+        echo "Updating everything..."
+        cd /etc/nixos
+        sudo nix flake update
+        sudo nixos-rebuild switch --flake /etc/nixos#Bider-Man
+        echo "All updates complete!"
+      end
     '';
-  };
+  }; 
   
   # STARSHIP PROMPT
   programs.starship.enable = true;
