@@ -54,6 +54,7 @@
   hardware.bluetooth.enable = true;
   services.upower.enable = true;
   services.thermald.enable = true;
+  hardware.uinput.enable = true;
   
   services.pipewire = {
     enable = true;
@@ -95,7 +96,7 @@
   # ==========================
   users.users.bider-man = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
+    extraGroups = [ "wheel" "networkmanager" "video" "audio" "input"];
     shell = pkgs.fish;
   };
 
@@ -136,6 +137,7 @@
     protonmail-desktop
     jq
     libreoffice-qt
+    game-devices-udev-rules
   ];
 
   # ==========================
