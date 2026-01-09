@@ -55,6 +55,9 @@
   services.upower.enable = true;
   services.thermald.enable = true;
   hardware.uinput.enable = true;
+  services.udev.extraRules = ''
+    SUBSYSTEM=="input", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="0ce6", MODE="0660", GROUP="input"
+  '';
   
   services.pipewire = {
     enable = true;
@@ -137,7 +140,7 @@
     protonmail-desktop
     jq
     libreoffice-qt
-    game-devices-udev-rules
+    usbutils
   ];
 
   # ==========================
