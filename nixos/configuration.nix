@@ -130,7 +130,6 @@
     lazygit
     zathura
     zathuraPkgs.zathura_pdf_poppler
-    vesktop
     steam
     protonup-qt
     kdePackages.dolphin
@@ -141,6 +140,10 @@
     jq
     libreoffice-qt
     usbutils
+    (pkgs.writeShellScriptBin "vesktop-fixed" ''
+      exec ${pkgs.vesktop}/bin/vesktop --disable-accelerated-video-decode "$@"
+    '')
+    vesktop
   ];
 
   # ==========================
