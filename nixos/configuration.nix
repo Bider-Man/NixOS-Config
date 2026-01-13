@@ -55,9 +55,6 @@
   services.upower.enable = true;
   services.thermald.enable = true;
   hardware.uinput.enable = true;
-  services.udev.extraRules = ''
-    SUBSYSTEM=="input", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="0ce6", MODE="0660", GROUP="input"
-  '';
   
   services.pipewire = {
     enable = true;
@@ -99,7 +96,7 @@
   # ==========================
   users.users.bider-man = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "audio" "input"];
+    extraGroups = [ "wheel" "networkmanager" "video" "audio" "input" "uinput" "steam" ];
     shell = pkgs.fish;
   };
 
@@ -113,6 +110,7 @@
     git
     lshw
     home-manager
+    starship
     fzf
     fish
     udiskie
@@ -130,7 +128,6 @@
     lazygit
     zathura
     zathuraPkgs.zathura_pdf_poppler
-    steam
     protonup-qt
     kdePackages.dolphin
     kdePackages.ark
@@ -140,10 +137,10 @@
     jq
     libreoffice-qt
     usbutils
-    (pkgs.writeShellScriptBin "vesktop-fixed" ''
-      exec ${pkgs.vesktop}/bin/vesktop --disable-accelerated-video-decode "$@"
-    '')
     vesktop
+    jupyter-all
+    python315
+    opencode
   ];
 
   # ==========================
@@ -154,6 +151,34 @@
   programs.fish.enable = true;
   programs.nix-ld.enable = true;
   programs.dconf.enable = true;
+
+  # ==========================
+  # STEAM & Gaming
+  # ==========================
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    gamescopeSession.enable = true;
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+    ];
+  };
+  hardware.steam-hardware.enable = true;
+  services.udev.extraRules = ''
+    # PS5 Controller (existing rule)
+    SUBSYSTEM=="input", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="0ce6", MODE="0660", GROUP="input"
+  
+    # Additional rules for PS5 controller in Steam
+    KERNEL=="hidraw*", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="0ce6", MODE="0666"
+    KERNEL=="uinput", MODE="0660", GROUP="input"
+  
+    # Generic game controller permissions
+    KERNEL=="uinput", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"
+    KERNEL=="js*", MODE="0660", GROUP="input"
+    KERNEL=="event*", MODE="0660", GROUP="input"
+  '';
+
 
   # ==========================
   # FONTS

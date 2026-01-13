@@ -133,7 +133,6 @@
     '';
   }; 
   
-  # STARSHIP PROMPT
   programs.starship.enable = true;
 
   # ==========================
@@ -211,6 +210,13 @@
     # File management
     ranger
     pcmanfm
+
+    # Controller tools
+    jstest-gtk
+    sc-controller
+
+    # Steam
+    steam-run
   ];
   
   # ==========================
@@ -249,6 +255,9 @@
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     WLR_NO_HARDWARE_CURSORS = "1";
+    SDL_JOYSTICK_HIDAPI_PS5 = "1";
+    SDL_JOYSTICK_HIDAPI = "1";
+    SDL_GAMECONTROLLERCONFIG = "";
   };
   
   # ==========================
@@ -290,6 +299,7 @@
       nvim-cmp
       which-key-nvim
       nvim-web-devicons
+      opencode-nvim
     ];
   
     extraPackages = with pkgs; [
