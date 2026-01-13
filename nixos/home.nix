@@ -299,7 +299,6 @@
       nvim-cmp
       which-key-nvim
       nvim-web-devicons
-      opencode-nvim
     ];
   
     extraPackages = with pkgs; [

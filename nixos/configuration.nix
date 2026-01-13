@@ -140,7 +140,6 @@
     vesktop
     jupyter-all
     python315
-    opencode
   ];
 
   # ==========================
