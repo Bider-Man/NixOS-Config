@@ -33,7 +33,7 @@
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
     modesetting.enable = true;
-    open = false;
+    open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     powerManagement.enable = true;
@@ -137,9 +137,12 @@
     jq
     libreoffice-qt
     usbutils
-    vesktop
     jupyter-all
     python315
+    vesktop
+    samrewritten
+    texliveFull
+    blueman
   ];
 
   # ==========================
@@ -150,6 +153,7 @@
   programs.fish.enable = true;
   programs.nix-ld.enable = true;
   programs.dconf.enable = true;
+  programs.starship.enable = true;
 
   # ==========================
   # STEAM & Gaming

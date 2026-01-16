@@ -83,7 +83,7 @@
     # Aliases for Fish
     shellInit = ''
       # ===== NIXOS ALIASES =====
-      alias nrb='sudo nixos-rebuild switch --flake /etc/nixos#'
+      alias nrb='cd /etc/nixos; and sudo nixos-rebuild switch --flake /etc/nixos#'
       alias nrt='sudo nixos-rebuild test --flake /etc/nixos#'
       alias nrb-boot='sudo nixos-rebuild boot --flake /etc/nixos#'
       alias nrc='sudo nix-collect-garbage --delete-old'
@@ -133,8 +133,6 @@
     '';
   }; 
   
-  programs.starship.enable = true;
-
   # ==========================
   # 3. GIT CONFIGURATION (FIXED for Nix 25.11)
   # ==========================
