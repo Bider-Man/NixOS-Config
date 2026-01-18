@@ -143,6 +143,7 @@
     samrewritten
     texliveFull
     blueman
+    prismlauncher
   ];
 
   # ==========================
