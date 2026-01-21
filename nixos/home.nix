@@ -201,60 +201,80 @@
       ))
     ];
     
-    extraConfig = ''
-      " Basic Neovim settings
-      set number
-      set relativenumber
-      set tabstop=2
-      set shiftwidth=2
-      set expandtab
-      set smartindent
-      set termguicolors
-      
-      " Enable mouse support
-      set mouse=a
-      
-      " Enable clipboard
-      set clipboard+=unnamedplus
-      
-      " Set colorscheme
-      colorscheme tokyonight-night
-      
-      " Key mappings
-      let mapleader = " "
-      nnoremap <leader>ff <cmd>Telescope find_files<cr>
-      nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-      nnoremap <leader>fb <cmd>Telescope buffers<cr>
-      nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-      
-      " LSP keymaps
-      nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<cr>
-      nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<cr>
-      nnoremap <silent> <leader>ca <cmd>lua vim.lsp.buf.code_action()<cr>
-    '';
-    
-    extraPackages = with pkgs; [
-      # LSP servers
-      nodePackages.typescript-language-server
-      nodePackages.vscode-langservers-extracted
-      lua-language-server
-      nil  # Nix LSP
-      rust-analyzer
-      vimPlugins.coc-pyright
-      texlab  # LaTeX LSP
-      
-      # Formatters
-      black  # Python
-      stylua  # Lua
-      nixfmt  # Nix
-      prettierd  # JS/TS/HTML/CSS
-      
-      # Tools
-      ripgrep  # For telescope live_grep
-      fd  # For telescope find_files
-    ];
-  };
+  extraConfig = ''
+    " Basic Neovim settings
+    set number
+    set relativenumber
+    set tabstop=2
+    set shiftwidth=2
+    set expandtab
+    set smartindent
+    set termguicolors
   
+    " Enable mouse support
+    set mouse=a
+  
+    " Enable clipboard
+    set clipboard+=unnamedplus
+  
+    " Set colorscheme
+    colorscheme tokyonight-night
+  
+    " Key mappings
+    let mapleader = " "
+    nnoremap <leader>ff <cmd>Telescope find_files<cr>
+    nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+    nnoremap <leader>fb <cmd>Telescope buffers<cr>
+    nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+  
+    " LSP keymaps
+    nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<cr>
+    nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<cr>
+    nnoremap <silent> <leader>ca <cmd>lua vim.lsp.buf.code_action()<cr>
+  
+    " ====================================
+    " VIMTEX CONFIGURATION
+    " ====================================
+  
+    " Set VimTeX to use Zathura as the PDF viewer
+    let g:vimtex_view_method = 'zathura'
+  
+    " Enable VimTeX's features
+    let g:vimtex_compiler_enabled = 1
+    let g:vimtex_compiler_method = 'latexmk'
+    let g:vimtex_compiler_latexmk = {
+          \ 'build_dir' : 'build',
+          \ 'callback' : 1,
+          \ 'continuous' : 1,
+          \ 'executable' : 'latexmk',
+          \ 'hooks' : [],
+          \ 'options' : [
+          \   '-verbose',
+          \   '-file-line-error',
+          \   '-synctex=1',
+          \   '-interaction=nonstopmode',
+          \ ],
+          \}
+  
+    " Set up Zathura options for forward/backward search
+    let g:vimtex_view_general_viewer = 'zathura'
+    let g:vimtex_view_general_options = '--synctex-forward @line:1:@tex @pdf'
+  
+    " Key mappings for VimTeX
+    " <leader>ll - Compile LaTeX document
+    " <leader>lv - View PDF (opens Zathura with forward search)
+    " <leader>lc - Clean auxiliary files
+    nmap <leader>ll <plug>(vimtex-compile)
+    nmap <leader>lv <plug>(vimtex-view)
+    nmap <leader>lk <plug>(vimtex-stop)
+    nmap <leader>le <plug>(vimtex-errors)
+    nmap <leader>lc <plug>(vimtex-clean)
+  
+    " Toggle VimTeX compilation (continuous mode)
+    nmap <leader>lt <plug>(vimtex-compile-toggle)
+  '';
+  };
+
   # ==========================
   # 5. GTK THEMING
   # ==========================
