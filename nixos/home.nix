@@ -1,29 +1,27 @@
 # ================================================
-# FILE: home.nix (CORRECTED)
+# FILE: home.nix (UPDATED WITH NEOVIM PLUGINS)
 # ================================================
 
 { config, lib, pkgs, inputs, ... }:
 
 {
+  imports = [
+    ./modules/packages/user-packages.nix
+  ];
+
   # ==========================
   # 1. BASIC SETTINGS
   # ==========================
   home.username = "bider-man";
   home.homeDirectory = "/home/bider-man";
   home.stateVersion = "25.11";
-  
-  # Disable version check to avoid warnings
   home.enableNixpkgsReleaseCheck = false;
 
   # ==========================
   # 2. SHELL CONFIGURATION
   # ==========================
-  
-  # BASH SHELL
   programs.bash = {
     enable = true;
-  
-    # Aliases for NixOS
     initExtra = ''
       # ===== NIXOS ALIASES =====
       alias nrb='sudo nixos-rebuild switch --flake /etc/nixos#'
@@ -55,32 +53,11 @@
       # ===== NAVIGATION =====
       alias cdnix='cd /etc/nixos'
       alias cdconf='cd ~/.config'
-    
-      # ===== HELPER FUNCTIONS =====
-      nix-help() {
-        echo ""
-        echo "NIXOS COMMANDS:"
-        echo "nrb   - Rebuild system"
-        echo "nrc   - Clean old generations"
-        echo "ncu   - Update flake"
-        echo ""
-      }
-    
-      nix-update-all() {
-        echo "Updating everything..."
-        cd /etc/nixos
-        sudo nix flake update
-        sudo nixos-rebuild switch --flake /etc/nixos#Bider-Man
-        echo "All updates complete!"
-      }
     '';
   };
 
-  # FISH SHELL
   programs.fish = {
     enable = true;
-
-    # Aliases for Fish
     shellInit = ''
       # ===== NIXOS ALIASES =====
       alias nrb='cd /etc/nixos; and sudo nixos-rebuild switch --flake /etc/nixos#'
@@ -112,32 +89,15 @@
       # ===== NAVIGATION =====
       alias cdnix='cd /etc/nixos'
       alias cdconf='cd ~/.config'
-    
-      # ===== HELPER FUNCTIONS =====
-      function nix-help
-        echo ""
-        echo "NIXOS COMMANDS:"
-        echo "nrb   - Rebuild system"
-        echo "nrc   - Clean old generations"
-        echo "ncu   - Update flake"
-        echo ""
-      end
-    
-      function nix-update-all
-        echo "Updating everything..."
-        cd /etc/nixos
-        sudo nix flake update
-        sudo nixos-rebuild switch --flake /etc/nixos#Bider-Man
-        echo "All updates complete!"
-      end
     '';
-  }; 
+  };
   
   # ==========================
-  # 3. GIT CONFIGURATION (FIXED for Nix 25.11)
+  # 3. GIT CONFIGURATION (FIXED for 25.11)
   # ==========================
   programs.git = {
     enable = true;
+    # Use the new settings format
     settings = {
       user = {
         name = "bider-man";
@@ -158,67 +118,145 @@
   };
   
   # ==========================
-  # 4. USER PACKAGES (SIMPLIFIED)
+  # 4. NEOVIM WITH ALL YOUR PLUGINS
   # ==========================
-  home.packages = with pkgs; [
-    # Terminal tools
-    bat
-    eza
-    fzf
-    ripgrep
-    starship
-    papirus-icon-theme
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    withPython3 = true;
     
-    # Hyprland tools
-    hyprpaper
-    hyprpicker
-    hyprlock
+    # All your plugins from nixpkgs
+    plugins = with pkgs.vimPlugins; [
+      # Autopairs
+      nvim-autopairs
+      
+      # Colorscheme (using tokyonight as an example)
+      tokyonight-nvim
+      
+      # Markdown
+      markdown-preview-nvim
+      
+      # Telescope
+      telescope-nvim
+      telescope-fzf-native-nvim
+      plenary-nvim  # Dependency for telescope
+      
+      # VimTeX
+      vimtex
+      
+      # Barbar (buffer tabs)
+      barbar-nvim
+      
+      # Barbecue (winbar)
+      barbecue-nvim
+      nvim-web-devicons  # Dependency for barbecue
+      
+      # Nvim-cmp (completion)
+      nvim-cmp
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      cmp-cmdline
+      luasnip  # For snippets
+      cmp_luasnip
+      
+      # LSP
+      nvim-lspconfig
+      lsp_signature-nvim
+      
+      # Status line
+      lualine-nvim
+      
+      # Snacks (if this is what you meant by snacks.lua)
+      # Note: I'm not sure about this one, you might need to find the correct package name
+      
+      # Todo comments
+      todo-comments-nvim
+      
+      # Which-key
+      which-key-nvim
+      
+      # Treesitter (highly recommended)
+      (nvim-treesitter.withPlugins (
+        plugins: with plugins; [
+          tree-sitter-nix
+          tree-sitter-lua
+          tree-sitter-vim
+          tree-sitter-bash
+          tree-sitter-python
+          tree-sitter-json
+          tree-sitter-yaml
+          tree-sitter-markdown
+          tree-sitter-comment
+          tree-sitter-c
+          tree-sitter-cpp
+          tree-sitter-rust
+          tree-sitter-javascript
+          tree-sitter-typescript
+          tree-sitter-html
+          tree-sitter-css
+        ]
+      ))
+    ];
     
-    # Wayland utilities
-    grim
-    slurp
-    wl-clipboard
+    extraConfig = ''
+      " Basic Neovim settings
+      set number
+      set relativenumber
+      set tabstop=2
+      set shiftwidth=2
+      set expandtab
+      set smartindent
+      set termguicolors
+      
+      " Enable mouse support
+      set mouse=a
+      
+      " Enable clipboard
+      set clipboard+=unnamedplus
+      
+      " Set colorscheme (you can change this)
+      colorscheme tokyonight-night
+      
+      " Key mappings
+      let mapleader = " "
+      nnoremap <leader>ff <cmd>Telescope find_files<cr>
+      nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+      nnoremap <leader>fb <cmd>Telescope buffers<cr>
+      nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+      
+      " LSP keymaps
+      nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<cr>
+      nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<cr>
+      nnoremap <silent> <leader>ca <cmd>lua vim.lsp.buf.code_action()<cr>
+    '';
     
-    # Widgets
-    waybar
-    rofi
-    
-    # Notifications
-    dunst
-    
-    # Media
-    mpv
-    feh
-    pavucontrol
-
-    # Codec support
-    gst_all_1.gstreamer
-    gst_all_1.gst-plugins-base
-    gst_all_1.gst-plugins-good
-    gst_all_1.gst-plugins-bad
-    gst_all_1.gst-plugins-ugly
-    gst_all_1.gst-libav
-    
-    # System tools
-    btop
-    htop
-    lm_sensors
-    neofetch
-    
-    # File management
-    ranger
-    pcmanfm
-
-    # Controller tools
-    jstest-gtk
-    sc-controller
-
-    # Steam
-    steam-run
-  ];
+    extraPackages = with pkgs; [
+      # LSP servers
+      nodePackages.typescript-language-server
+      nodePackages.vscode-langservers-extracted
+      lua-language-server
+      nil  # Nix LSP
+      rust-analyzer
+      vimPlugins.coc-pyright
+      texlab  # LaTeX LSP
+      
+      # Formatters
+      black  # Python
+      stylua  # Lua
+      nixfmt  # Nix
+      prettierd  # JS/TS/HTML/CSS
+      
+      # Tools
+      ripgrep  # For telescope live_grep
+      fd  # For telescope find_files
+    ];
+  };
   
   # ==========================
-  # 5. GTK/QT THEMING (SIMPLIFIED)
+  # 5. GTK THEMING
   # ==========================
   gtk.enable = true;
   
@@ -230,6 +268,9 @@
     dunst.enable = true;
   };
   
+  # ==========================
+  # 7. CURSOR THEMING
+  # ==========================
   home.pointerCursor = {
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Dark";
@@ -239,7 +280,7 @@
   };
 
   # ==========================
-  # 7. ENVIRONMENT VARIABLES
+  # 8. ENVIRONMENT VARIABLES
   # ==========================
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -253,60 +294,10 @@
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     WLR_NO_HARDWARE_CURSORS = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
+    NIXOS_OZONE_WL = "1";
     SDL_JOYSTICK_HIDAPI_PS5 = "1";
     SDL_JOYSTICK_HIDAPI = "1";
     SDL_GAMECONTROLLERCONFIG = "";
   };
-  
-  # ==========================
-  # 8. FIX FOR EXISTING CONFIGS
-  # ==========================
-  home.activation = {
-    checkExistingConfigs = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      echo "Checking for existing configs..."
-      if [ -d "$HOME/.config/waybar" ]; then
-        echo "Waybar config exists, skipping..."
-      fi
-      if [ -d "$HOME/.config/hypr" ]; then
-        echo "Hyprland config exists, skipping..."
-      fi
-    '';
-  };
-
-  # ==========================
-  # 9. NEOVIM CONFIG (MINIMAL WORKING VERSION)
-  # ==========================
-  programs.neovim = {
-    enable = true;
-    withPython3 = true;
-  
-    # ONLY plugins that exist in nixpkgs 25.11
-    plugins = with pkgs.vimPlugins; [
-      # These definitely exist:
-      nvim-lspconfig
-      nvim-treesitter
-      telescope-nvim
-      telescope-fzf-native-nvim
-      tokyonight-nvim
-      nvim-autopairs
-      lualine-nvim
-      todo-comments-nvim
-      vimtex
-      barbar-nvim
-      barbecue-nvim
-      nvim-cmp
-      which-key-nvim
-      nvim-web-devicons
-    ];
-  
-    extraPackages = with pkgs; [
-      ripgrep  # For telescope
-      fd       # For telescope
-    ];
-  };
-
-  # ===========================
-  # 10. Quickshell
-  # ===========================
-  programs.quickshell.enable = true;
 }
