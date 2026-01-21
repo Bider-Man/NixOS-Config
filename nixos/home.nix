@@ -169,8 +169,8 @@
       # Status line
       lualine-nvim
       
-      # Snacks (if this is what you meant by snacks.lua)
-      # Note: I'm not sure about this one, you might need to find the correct package name
+      # Snacks
+      snacks-nvim
       
       # Todo comments
       todo-comments-nvim
@@ -178,7 +178,7 @@
       # Which-key
       which-key-nvim
       
-      # Treesitter (highly recommended)
+      # Treesitter
       (nvim-treesitter.withPlugins (
         plugins: with plugins; [
           tree-sitter-nix
@@ -217,7 +217,7 @@
       " Enable clipboard
       set clipboard+=unnamedplus
       
-      " Set colorscheme (you can change this)
+      " Set colorscheme
       colorscheme tokyonight-night
       
       " Key mappings

@@ -25,6 +25,7 @@
     rsync
     jq
     ripgrep
+    tree
     
     # ===== DEVELOPMENT =====
     python315
