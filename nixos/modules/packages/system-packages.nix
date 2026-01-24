@@ -28,6 +28,9 @@
     tree
     grim
     slurp
+    pamixer
+    brightnessctl
+    swayosd
     
     # ===== DEVELOPMENT =====
     python315
