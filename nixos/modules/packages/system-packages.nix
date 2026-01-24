@@ -26,6 +26,8 @@
     jq
     ripgrep
     tree
+    grim
+    slurp
     
     # ===== DEVELOPMENT =====
     python315
