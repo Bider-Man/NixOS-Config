@@ -31,6 +31,7 @@
       # Additional fonts that might be needed
       pkgs.rubik
       pkgs.lexend
+      icon-library
 
       # Icon Themes
       papirus-icon-theme
@@ -47,5 +48,10 @@
         emoji = [ "Noto Color Emoji" ];
       };
     };
+  };
+
+  environment.sessionVariables = {
+    NIXPKGS_QT6_QML_IMPORT_PATH = "${pkgs.qt6.qtbase}/lib/qt6/qml";
+    QT_QPA_PLATFORMTHEME = "qtct";
   };
 }

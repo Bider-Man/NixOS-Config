@@ -285,7 +285,6 @@
   # ==========================
   services = {
     network-manager-applet.enable = true;
-    dunst.enable = true;
   };
   
   # ==========================
