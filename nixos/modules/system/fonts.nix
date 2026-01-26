@@ -31,6 +31,11 @@
       # Additional fonts that might be needed
       pkgs.rubik
       pkgs.lexend
+
+      # Icon Themes
+      papirus-icon-theme
+      adwaita-icon-theme
+      hicolor-icon-theme
     ];
     
     fontconfig = {

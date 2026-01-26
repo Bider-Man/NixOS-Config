@@ -40,6 +40,8 @@
     ]))
     jupyter-all
     texliveFull
+    gtk3
+    gtk4
     
     # ===== MULTIMEDIA =====
     ffmpeg
@@ -94,7 +96,8 @@
     lazygit
     samrewritten
     
-    # ===== QT DEPENDENCIES =====
+    # ===== EXTRA =====
+    matugen
     
     # ===== WAYLAND UTILITIES =====
     wl-clipboard

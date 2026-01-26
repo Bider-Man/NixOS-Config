@@ -19,6 +19,7 @@
     hyprpaper
     hyprpicker
     hyprlock
+    hyprsunset
     grim
     slurp
     waybar
@@ -33,17 +34,13 @@
     
     # ===== SYSTEM MONITORING =====
     lm_sensors
-    neofetch
+    fastfetch
     
     # ===== FILE MANAGEMENT =====
     ranger
     pcmanfm
     
-    # ===== NOTIFICATIONS =====
-    dunst
-    
     # ===== THEMING =====
-    papirus-icon-theme
     bibata-cursors
     
     # ===== GSTREAMER (Multimedia) =====
