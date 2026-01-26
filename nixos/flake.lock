@@ -443,11 +443,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769213100,
-        "narHash": "sha256-/OJaEiSkbX1KVrR5QczSaO4S+PrI08qtI5BuzvWXXEU=",
+        "lastModified": 1769385907,
+        "narHash": "sha256-hUbEb7kdoBjB1zyGZA3mpp9oI5RMqC+wZhcO1qK8qZI=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "02508bed213f7bd3fc00e175eb1c01531b6d786f",
+        "rev": "068b3d335c56a2b6499ad623572c3fb48e17cd5f",
         "type": "github"
       },
       "original": {
@@ -459,11 +459,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1769212669,
-        "narHash": "sha256-cmTgIsQr0nuf+RXlPTtgbX2FaDHGRFz59LKc8Zq2nnI=",
+        "lastModified": 1769383511,
+        "narHash": "sha256-NCsf5TVBTHR0cMs1yVjfUHiRB89+faHV4Ls+ZXeMNmI=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "f10a1dcf4d73768dc056c058f8a6bebdfc6bd3be",
+        "rev": "95b03171df223e1fed5de15124a3b9204f37048a",
         "type": "github"
       },
       "original": {
@@ -520,15 +520,15 @@
       "locked": {
         "lastModified": 1768985439,
         "narHash": "sha256-qkU4r+l+UPz4dutMMRZSin64HuVZkEv9iFpu9yMWVY0=",
-        "owner": "quickshell-mirror",
-        "repo": "quickshell",
+        "ref": "refs/heads/master",
         "rev": "191085a8821b35680bba16ce5411fc9dbe912237",
-        "type": "github"
+        "revCount": 731,
+        "type": "git",
+        "url": "https://github.com/outfoxxed/quickshell"
       },
       "original": {
-        "owner": "quickshell-mirror",
-        "repo": "quickshell",
-        "type": "github"
+        "type": "git",
+        "url": "https://github.com/outfoxxed/quickshell"
       }
     },
     "root": {
@@ -604,11 +604,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769228180,
-        "narHash": "sha256-94KY0JNjdd3CcSyKlHPCPswlqmUrWT6+MfOHektsdB8=",
+        "lastModified": 1769315176,
+        "narHash": "sha256-w1aX0LxNLdhAB4nGsD+3U4XBzr1nfKza/LxT3cD4h28=",
         "owner": "youwen5",
         "repo": "zen-browser-flake",
-        "rev": "ef1663c14b7c3c2b84bcf140232534be5a2a0257",
+        "rev": "0c4d40528c156b00067df5e90e5dca8dfe2e2735",
         "type": "github"
       },
       "original": {

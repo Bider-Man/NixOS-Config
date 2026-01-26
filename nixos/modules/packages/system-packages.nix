@@ -68,7 +68,17 @@
     vesktop
     whatsapp-electron
     electron
-    quickshell
+    (inputs.quickshell.packages.${pkgs.system}.default.overrideAttrs (oldAttrs: {
+      buildInputs = (oldAttrs.buildInputs or []) ++ [ 
+        pkgs.qt6Packages.qt5compat
+	pkgs.qt6Packages.qtpositioning
+	pkgs.kdePackages.syntax-highlighting
+	pkgs.kdePackages.kirigami
+      ];
+      qtWrapperArgs = (oldAttrs.qtWrapperArgs or []) ++ [
+        "--prefix QML2_IMPORT_PATH : ${pkgs.qt6Packages.qt5compat}/${pkgs.qt6Packages.qtbase.qtQmlPrefix}"
+      ];
+    }))
     cava
     ddcutil
     
@@ -81,11 +91,6 @@
     samrewritten
     
     # ===== QT DEPENDENCIES =====
-    qt6Packages.qt5compat
-    qt6Packages.qtbase
-    qt6Packages.qtdeclarative
-    qt6Packages.qtwayland
-    qt6Packages.qtquick3d
     
     # ===== WAYLAND UTILITIES =====
     wl-clipboard

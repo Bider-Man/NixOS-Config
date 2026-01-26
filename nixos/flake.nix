@@ -38,7 +38,7 @@
 
     # Quickshell
     quickshell = {
-      url = "github:quickshell-mirror/quickshell";
+      url = "git+https://github.com/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
