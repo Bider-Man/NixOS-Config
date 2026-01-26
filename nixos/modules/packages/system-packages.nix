@@ -33,7 +33,11 @@
     swayosd
     
     # ===== DEVELOPMENT =====
-    python315
+    (python3.withPackages (ps: with ps; [
+      pillow
+      material-color-utilities
+      materialyoucolor
+    ]))
     jupyter-all
     texliveFull
     
